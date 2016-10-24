@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import permission_required
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils.translation import ugettext_lazy as _
 
 from ..forms import VoteForm
 from ..models import Poll, Vote
@@ -27,7 +28,7 @@ def vote(request, poll_pk):
         int(poll_pk)
 
     except ValueError:
-        return HttpResponse("<h1>Oops, there is no poll to vote on!</h1>", status=500)
+        return HttpResponse("<h1>{0}</h1>".format(_('Oops, there is no poll to vote on!')), status=500)
 
     poll = get_object_or_404(Poll, pk=poll_pk)
 
@@ -52,4 +53,4 @@ def vote(request, poll_pk):
             })
         return JsonResponse(data)
 
-    return HttpResponse("<h1> 403 Forbidden</h1>", status=403)
+    return HttpResponse("<h1>{0}</h1>".format(_('403 Forbidden')), status=403)
