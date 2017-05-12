@@ -14,9 +14,7 @@ class BasePollChooserPanel(BaseChooserPanel):
 
     @classmethod
     def widget_overrides(cls):
-        model_meta = cls.target_model()._meta
-        content_type = ContentType.objects.get(app_label=model_meta.app_label, model=model_meta.model_name)
-        # Changes the call parameters of ``AdminPollChooser`` from ``model`` to ``content_type``
+        content_type = ContentType.objects.get_for_model(cls.target_model())
         return {cls.field_name: AdminPollChooser(content_type=content_type)}
 
     @classmethod
