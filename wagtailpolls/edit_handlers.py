@@ -1,3 +1,4 @@
+from django.apps import apps
 from django.contrib.contenttypes.models import ContentType
 from django.template.loader import render_to_string
 from django.utils.encoding import force_text
@@ -14,8 +15,7 @@ class BasePollChooserPanel(BaseChooserPanel):
 
     @classmethod
     def widget_overrides(cls):
-        content_type = ContentType.objects.get_for_model(cls.target_model())
-        return {cls.field_name: AdminPollChooser(content_type=content_type)}
+        return {cls.field_name: AdminPollChooser(model=cls.target_model())}
 
     @classmethod
     def target_model(cls):

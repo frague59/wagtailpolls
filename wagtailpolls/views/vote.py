@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import permission_required
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext_lazy as _
+from django.views.decorators.csrf import csrf_exempt
+
 from wagtailpolls.forms import VoteForm
 from wagtailpolls.models import Poll, Vote
 
